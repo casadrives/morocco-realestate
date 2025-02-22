@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarouty Clone - Le site immobilier N°1 au Maroc</title>
+    <meta name="description" content="Trouvez la maison de vos rêves - Le site immobilier N°1 au Maroc">
+    <link rel="stylesheet" href="css/sarouty.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <h1>Sarouty Clone</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#" data-lang="buy">Acheter</a>
+                <a href="#" data-lang="rent">Louer</a>
+                <a href="#" data-lang="professional">Professionnel</a>
+                <a href="#" data-lang="newProperty">ImmoNeuf</a>
+                <a href="#" data-lang="findAgent">Trouver un agent</a>
+                <a href="#" data-lang="blog">Blog</a>
+            </div>
+            <div class="actions">
+                <button class="lang-btn" onclick="toggleLanguage()">عربي</button>
+                <button class="post-btn" data-lang="postAd">Diffusez votre annonce</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 data-lang="heroTitle">Trouvez votre future maison</h1>
+                <div class="search-container">
+                    <select class="property-type" data-lang-placeholder="propertyType">
+                        <option value="all" data-lang="allProperties">Tous les biens</option>
+                        <option value="apartment" data-lang="apartment">Appartement</option>
+                        <option value="house" data-lang="house">Maison</option>
+                        <option value="villa" data-lang="villa">Villa</option>
+                        <option value="land" data-lang="land">Terrain</option>
+                    </select>
+                    <select class="location" data-lang-placeholder="location">
+                        <option value="" data-lang="selectCity">Sélectionnez une ville</option>
+                        <option value="casablanca">Casablanca</option>
+                        <option value="rabat">Rabat</option>
+                        <option value="marrakech">Marrakech</option>
+                        <option value="tanger">Tanger</option>
+                        <option value="agadir">Agadir</option>
+                    </select>
+                    <select class="transaction-type">
+                        <option value="buy" data-lang="forSale">À vendre</option>
+                        <option value="rent" data-lang="forRent">À louer</option>
+                    </select>
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                        <span data-lang="search">Rechercher</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="popular-searches">
+            <div class="section-container">
+                <h2 class="section-title" data-lang="popularSearches">Recherches populaires</h2>
+                <div class="search-grid">
+                    <div class="search-card">
+                        <h3 data-lang="toRent">À Louer</h3>
+                        <div class="search-links">
+                            <a href="#">Appartements à louer à Casablanca</a>
+                            <a href="#">Appartements à louer à Marrakech</a>
+                            <a href="#">Appartements à louer à Rabat</a>
+                            <a href="#">Appartements à louer à Tanger</a>
+                            <a href="#">Appartements à louer à Agadir</a>
+                        </div>
+                    </div>
+                    <div class="search-card">
+                        <h3 data-lang="toBuy">À Vendre</h3>
+                        <div class="search-links">
+                            <a href="#">Appartements à vendre à Casablanca</a>
+                            <a href="#">Villas à vendre à Marrakech</a>
+                            <a href="#">Maisons à vendre à Rabat</a>
+                            <a href="#">Terrains à vendre à Tanger</a>
+                            <a href="#">Appartements à vendre à Agadir</a>
+                        </div>
+                    </div>
+                    <div class="search-card">
+                        <h3 data-lang="popularAreas">Quartiers Populaires</h3>
+                        <div class="search-links">
+                            <a href="#">Maarif - Casablanca</a>
+                            <a href="#">Guéliz - Marrakech</a>
+                            <a href="#">Agdal - Rabat</a>
+                            <a href="#">Malabata - Tanger</a>
+                            <a href="#">Founty - Agadir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cities-section">
+            <div class="section-container">
+                <h2 class="section-title" data-lang="popularCities">Villes populaires</h2>
+                <div class="cities-grid">
+                    <div class="city-card">
+                        <img src="https://images.unsplash.com/photo-1577147443647-81856d5151af?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Casablanca">
+                        <div class="city-overlay">
+                            <h3>Casablanca</h3>
+                        </div>
+                    </div>
+                    <div class="city-card">
+                        <img src="https://images.unsplash.com/photo-1597212720158-e21f7e546389?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Marrakech">
+                        <div class="city-overlay">
+                            <h3>Marrakech</h3>
+                        </div>
+                    </div>
+                    <div class="city-card">
+                        <img src="https://images.unsplash.com/photo-1579014464128-c61daa6c5229?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Rabat">
+                        <div class="city-overlay">
+                            <h3>Rabat</h3>
+                        </div>
+                    </div>
+                    <div class="city-card">
+                        <img src="https://images.unsplash.com/photo-1553603227-2358aabe821f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Tanger">
+                        <div class="city-overlay">
+                            <h3>Tanger</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sarouty Clone</h3>
+                <p data-lang="footerDesc">Le site immobilier N°1 au Maroc</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3 data-lang="quickLinks">Liens rapides</h3>
+                <ul class="footer-links">
+                    <li><a href="#" data-lang="aboutUs">À propos</a></li>
+                    <li><a href="#" data-lang="terms">Termes & conditions</a></li>
+                    <li><a href="#" data-lang="privacy">Charte de confidentialité</a></li>
+                    <li><a href="#" data-lang="cookies">Cookies Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-lang="contact">Contact</h3>
+                <ul class="footer-links">
+                    <li><a href="#" data-lang="careers">Carrière</a></li>
+                    <li><a href="#" data-lang="proArea">Espace Pro</a></li>
+                    <li><a href="#" data-lang="qualityPolicy">Politique Qualité</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Sarouty Clone. <span data-lang="rights">Tous droits réservés</span></p>
+        </div>
+    </footer>
+
+    <!-- Translations -->
+    <script src="js/sarouty-translations.js"></script>
+    <!-- Main JavaScript -->
+    <script src="js/sarouty.js"></script>
+</body>
+</html>
