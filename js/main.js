@@ -147,6 +147,15 @@ function contactAgent(propertyId) {
 // Current language
 let currentLang = 'ar';
 
+// Language configuration
+const languageConfig = {
+    ar: { dir: 'rtl', name: 'العربية', next: 'fr' },
+    fr: { dir: 'ltr', name: 'Français', next: 'en' },
+    en: { dir: 'ltr', name: 'English', next: 'es' },
+    es: { dir: 'ltr', name: 'Español', next: 'de' },
+    de: { dir: 'ltr', name: 'Deutsch', next: 'ar' }
+};
+
 // Translations object
 const translations = {
     ar: {
@@ -199,85 +208,62 @@ const translations = {
     }
 };
 
-// Function to translate the entire page
-function translatePage(lang) {
-    currentLang = lang;
-    
-    // Update HTML lang and dir attributes
+// Function to update page direction
+function updatePageDirection(lang) {
+    document.documentElement.dir = languageConfig[lang].dir;
     document.documentElement.lang = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    
-    // Update navigation links
-    document.querySelector('a[href="#home"]').textContent = translations[lang].home;
-    document.querySelector('a[href="#properties"]').textContent = translations[lang].properties;
-    document.querySelector('a[href="#cities"]').textContent = translations[lang].cities;
-    document.querySelector('a[href="#contact"]').textContent = translations[lang].contact;
-    
-    // Update hero section
-    document.querySelector('.hero-content h2').textContent = translations[lang].heroTitle;
-    document.querySelector('.search-container input').placeholder = translations[lang].searchPlaceholder;
-    
-    // Update select options
-    const select = document.querySelector('.search-container select');
-    select.innerHTML = `
-        <option value="all">${translations[lang].allProperties}</option>
-        <option value="sale">${translations[lang].forSale}</option>
-        <option value="rent">${translations[lang].forRent}</option>
-    `;
-    
-    // Update search button
-    document.querySelector('.search-btn').innerHTML = `
-        <i class="fas fa-search"></i>
-        ${translations[lang].search}
-    `;
-    
-    // Update featured properties section
-    document.querySelector('#featured h2').textContent = translations[lang].featuredProperties;
-    
-    // Update cities section
-    document.querySelector('#cities h2').textContent = translations[lang].discoverByCity;
-    
-    // Update contact section
-    document.querySelector('#contact h2').textContent = translations[lang].getInTouch;
-    
-    // Update contact form
-    const contactInputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
-    contactInputs[0].placeholder = translations[lang].fullName;
-    contactInputs[1].placeholder = translations[lang].email;
-    contactInputs[2].placeholder = translations[lang].phone;
-    contactInputs[3].placeholder = translations[lang].message;
-    
-    // Update footer
-    document.querySelector('.footer-section p').textContent = translations[lang].trustedAgent;
-    document.querySelector('.footer-section:nth-child(2) h3').textContent = translations[lang].quickLinks;
-    document.querySelector('.footer-section:nth-child(3) h3').textContent = translations[lang].newsletter;
-    document.querySelector('.footer-section:nth-child(3) p').textContent = translations[lang].subscribeText;
-    
-    // Update copyright
-    document.querySelector('.footer-bottom p').textContent = 
-        ` 2025 Dar Immo. ${translations[lang].allRightsReserved}`;
-    
-    // Reload properties and cities with new language
-    loadFeaturedProperties();
-    loadCities();
 }
 
-// Language toggle function
-function toggleLanguage() {
-    const langBtn = document.querySelector('.language-switch button');
+// Function to update language button
+function updateLanguageButton(lang) {
+    const nextLang = languageConfig[lang].next;
+    const langBtn = document.querySelector('.lang-btn');
+    langBtn.textContent = languageConfig[nextLang].name;
+}
+
+// Function to translate the page
+function translatePage(lang) {
+    // Add fade-out effect
     document.body.style.opacity = '0';
-    
+
     setTimeout(() => {
-        if (currentLang === 'ar') {
-            translatePage('fr');
-            langBtn.textContent = 'عربي';
-        } else {
-            translatePage('ar');
-            langBtn.textContent = 'FR';
-        }
+        // Update all elements with data-lang attribute
+        document.querySelectorAll('[data-lang]').forEach(element => {
+            const key = element.getAttribute('data-lang');
+            if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+
+        // Update all placeholders with data-lang-placeholder attribute
+        document.querySelectorAll('[data-lang-placeholder]').forEach(element => {
+            const key = element.getAttribute('data-lang-placeholder');
+            if (translations[lang][key]) {
+                element.placeholder = translations[lang][key];
+            }
+        });
+
+        // Update page direction and language button
+        updatePageDirection(lang);
+        updateLanguageButton(lang);
+
+        // Add fade-in effect
         document.body.style.opacity = '1';
     }, 300);
 }
+
+// Function to toggle language
+function toggleLanguage() {
+    const nextLang = languageConfig[currentLang].next;
+    currentLang = nextLang;
+    translatePage(currentLang);
+}
+
+// Initialize AOS
+AOS.init({
+    duration: 800,
+    easing: 'ease-in-out'
+});
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
@@ -286,12 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     loadFeaturedProperties();
     loadCities();
-
-    // Initialize AOS animation library
-    AOS.init({
-        duration: 800,
-        once: true
-    });
 
     // Add smooth scrolling for navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
