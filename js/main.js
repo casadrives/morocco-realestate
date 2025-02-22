@@ -180,7 +180,14 @@ const translations = {
         newsletter: 'النشرة الإخبارية',
         subscribeText: 'اشترك الآن',
         allRightsReserved: 'جميع الحقوق محفوظة',
-        search: 'بحث'
+        search: 'بحث',
+        propertyTitle1: "فيلا فاخرة مع حمام سباحة",
+        propertyTitle2: "شقة حديثة وسط المدينة",
+        propertyTitle3: "منزل تقليدي في المدينة القديمة",
+        rooms: "غرف",
+        bathrooms: "حمامات",
+        sqMeters: "م²",
+        contactAgent: "تواصل مع الوكيل"
     },
     fr: {
         home: 'Accueil',
@@ -204,7 +211,14 @@ const translations = {
         newsletter: 'Newsletter',
         subscribeText: 'Abonnez-vous maintenant',
         allRightsReserved: 'Tous droits réservés',
-        search: 'Rechercher'
+        search: 'Rechercher',
+        propertyTitle1: "Villa de luxe avec piscine",
+        propertyTitle2: "Appartement moderne en centre-ville",
+        propertyTitle3: "Maison traditionnelle dans la médina",
+        rooms: "chambres",
+        bathrooms: "salles de bain",
+        sqMeters: "m²",
+        contactAgent: "Contactez l'agent"
     }
 };
 
