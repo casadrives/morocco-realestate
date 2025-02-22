@@ -20,6 +20,7 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--light-bg);
+    transition: opacity 0.3s ease;
 }
 
 /* Header Styles */
@@ -76,6 +77,55 @@ body {
     width: 100%;
 }
 
+/* Language-specific fonts */
+html[lang="ar"] {
+    font-family: 'Almarai', sans-serif;
+}
+
+html[lang="fr"] {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* RTL-specific styles */
+html[dir="rtl"] {
+    text-align: right;
+}
+
+html[dir="rtl"] .nav-links a {
+    margin-left: 2rem;
+    margin-right: 0;
+}
+
+html[dir="rtl"] .property-type {
+    right: 1rem;
+    left: auto;
+}
+
+html[dir="rtl"] .property-features span {
+    margin-right: 0;
+    margin-left: 1rem;
+}
+
+/* LTR-specific styles */
+html[dir="ltr"] {
+    text-align: left;
+}
+
+html[dir="ltr"] .nav-links a {
+    margin-right: 2rem;
+    margin-left: 0;
+}
+
+html[dir="ltr"] .property-type {
+    left: 1rem;
+    right: auto;
+}
+
+html[dir="ltr"] .property-features span {
+    margin-left: 0;
+    margin-right: 1rem;
+}
+
 /* Hero Section */
 .hero-section {
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../images/hero-bg.jpg');
@@ -101,6 +151,11 @@ body {
     font-size: 3.5rem;
     margin-bottom: 2rem;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Style adjustments for French text (usually longer) */
+html[lang="fr"] .hero-content h2 {
+    font-size: 3rem;
 }
 
 .search-container {
@@ -190,6 +245,12 @@ body {
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-weight: 600;
+}
+
+/* Style adjustments for French text (usually longer) */
+html[lang="fr"] .property-type {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
 }
 
 .property-content {
@@ -300,6 +361,23 @@ body {
     text-align: center;
 }
 
+/* Language switch button styles */
+.lang-btn {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.lang-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
 /* Animations */
 @keyframes fadeIn {
     from {
@@ -310,6 +388,12 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Add smooth transition for all translatable elements */
+[data-lang],
+[data-lang-placeholder] {
+    transition: all 0.3s ease;
 }
 
 /* Responsive Design */
@@ -343,5 +427,27 @@ body {
 
     .property-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Mobile responsiveness for different languages */
+    html[lang="fr"] .hero-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    html[lang="ar"] .hero-content h2 {
+        font-size: 2rem;
+    }
+    
+    .nav-links a {
+        margin: 0 1rem !important;
+    }
+    
+    .property-features {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .property-features span {
+        margin: 0.5rem !important;
     }
 }

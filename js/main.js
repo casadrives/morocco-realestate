@@ -144,21 +144,136 @@ function contactAgent(propertyId) {
     };
 }
 
-// Language toggle function with smooth transition
+// Current language
+let currentLang = 'ar';
+
+// Translations object
+const translations = {
+    ar: {
+        home: 'الرئيسية',
+        properties: 'العقارات',
+        cities: 'المدن',
+        contact: 'اتصل بنا',
+        heroTitle: 'استكشف عقارات المغرب',
+        searchPlaceholder: 'ابحث عن عقار',
+        allProperties: 'جميع العقارات',
+        forSale: 'للبيع',
+        forRent: 'للايجار',
+        featuredProperties: 'العقارات المميزة',
+        discoverByCity: 'اكتشف المدن',
+        getInTouch: 'تواصل معنا',
+        fullName: 'الاسم الكامل',
+        email: 'البريد الإلكتروني',
+        phone: 'رقم الهاتف',
+        message: 'رسالتك',
+        trustedAgent: 'وكيل موثوق',
+        quickLinks: 'روابط سريعة',
+        newsletter: 'النشرة الإخبارية',
+        subscribeText: 'اشترك الآن',
+        allRightsReserved: 'جميع الحقوق محفوظة',
+        search: 'بحث'
+    },
+    fr: {
+        home: 'Accueil',
+        properties: 'Propriétés',
+        cities: 'Villes',
+        contact: 'Contactez-nous',
+        heroTitle: 'Découvrez les propriétés du Maroc',
+        searchPlaceholder: 'Rechercher une propriété',
+        allProperties: 'Toutes les propriétés',
+        forSale: 'À vendre',
+        forRent: 'À louer',
+        featuredProperties: 'Propriétés en vedette',
+        discoverByCity: 'Découvrez les villes',
+        getInTouch: 'Contactez-nous',
+        fullName: 'Nom complet',
+        email: 'Adresse e-mail',
+        phone: 'Numéro de téléphone',
+        message: 'Votre message',
+        trustedAgent: 'Agent de confiance',
+        quickLinks: 'Liens rapides',
+        newsletter: 'Newsletter',
+        subscribeText: 'Abonnez-vous maintenant',
+        allRightsReserved: 'Tous droits réservés',
+        search: 'Rechercher'
+    }
+};
+
+// Function to translate the entire page
+function translatePage(lang) {
+    currentLang = lang;
+    
+    // Update HTML lang and dir attributes
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    
+    // Update navigation links
+    document.querySelector('a[href="#home"]').textContent = translations[lang].home;
+    document.querySelector('a[href="#properties"]').textContent = translations[lang].properties;
+    document.querySelector('a[href="#cities"]').textContent = translations[lang].cities;
+    document.querySelector('a[href="#contact"]').textContent = translations[lang].contact;
+    
+    // Update hero section
+    document.querySelector('.hero-content h2').textContent = translations[lang].heroTitle;
+    document.querySelector('.search-container input').placeholder = translations[lang].searchPlaceholder;
+    
+    // Update select options
+    const select = document.querySelector('.search-container select');
+    select.innerHTML = `
+        <option value="all">${translations[lang].allProperties}</option>
+        <option value="sale">${translations[lang].forSale}</option>
+        <option value="rent">${translations[lang].forRent}</option>
+    `;
+    
+    // Update search button
+    document.querySelector('.search-btn').innerHTML = `
+        <i class="fas fa-search"></i>
+        ${translations[lang].search}
+    `;
+    
+    // Update featured properties section
+    document.querySelector('#featured h2').textContent = translations[lang].featuredProperties;
+    
+    // Update cities section
+    document.querySelector('#cities h2').textContent = translations[lang].discoverByCity;
+    
+    // Update contact section
+    document.querySelector('#contact h2').textContent = translations[lang].getInTouch;
+    
+    // Update contact form
+    const contactInputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+    contactInputs[0].placeholder = translations[lang].fullName;
+    contactInputs[1].placeholder = translations[lang].email;
+    contactInputs[2].placeholder = translations[lang].phone;
+    contactInputs[3].placeholder = translations[lang].message;
+    
+    // Update footer
+    document.querySelector('.footer-section p').textContent = translations[lang].trustedAgent;
+    document.querySelector('.footer-section:nth-child(2) h3').textContent = translations[lang].quickLinks;
+    document.querySelector('.footer-section:nth-child(3) h3').textContent = translations[lang].newsletter;
+    document.querySelector('.footer-section:nth-child(3) p').textContent = translations[lang].subscribeText;
+    
+    // Update copyright
+    document.querySelector('.footer-bottom p').textContent = 
+        ` 2025 Dar Immo. ${translations[lang].allRightsReserved}`;
+    
+    // Reload properties and cities with new language
+    loadFeaturedProperties();
+    loadCities();
+}
+
+// Language toggle function
 function toggleLanguage() {
     const langBtn = document.querySelector('.language-switch button');
     document.body.style.opacity = '0';
+    
     setTimeout(() => {
-        if (langBtn.textContent === 'FR') {
+        if (currentLang === 'ar') {
+            translatePage('fr');
             langBtn.textContent = 'عربي';
-            document.documentElement.lang = 'fr';
-            document.documentElement.dir = 'ltr';
-            // Add logic to switch content to French
         } else {
+            translatePage('ar');
             langBtn.textContent = 'FR';
-            document.documentElement.lang = 'ar';
-            document.documentElement.dir = 'rtl';
-            // Add logic to switch content to Arabic
         }
         document.body.style.opacity = '1';
     }, 300);
@@ -166,6 +281,9 @@ function toggleLanguage() {
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize with Arabic
+    translatePage('ar');
+    
     loadFeaturedProperties();
     loadCities();
 
